@@ -1,4 +1,7 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { apiFetcher } from "@/lib/utilities";
 
 interface LoginProps {
@@ -8,7 +11,7 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const router = useRouter(); 
 
 
   const login = async (e: React.FormEvent)=>{
@@ -33,12 +36,16 @@ const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
     
         if (response?.statusCode === 200) {
           console.log(response.responseData.user)
+          //store user data in localStorage
+          localStorage.setItem("userData", JSON.stringify(response.responseData.user));
+          //redirect to dasboard
+          router.push("/dashboard");
         } else {
           alert(response?.msg || "Login failed failed. Please try again.");
         }
       } catch (error) {
-        console.error("Signup error:", error);
-        alert("Something went wrong. Please try again later.");
+        console.log("Signup error:", error);
+        //alert("Something went wrong. Please try again later.");
       }
   
   }
@@ -47,7 +54,7 @@ const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
 
 
   return (
-    <div className="min-h-screen bg-blue-50 flex items-center justify-center">
+    <div className="flex-1 bg-blue-50 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold text-blue-500 mb-6">Login</h1>
         <form className="space-y-4" onSubmit={login}>

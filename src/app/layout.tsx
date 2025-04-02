@@ -33,7 +33,7 @@ export default function RootLayout({
           <Topbar/>
 
           {/* Main Content Area */}
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex flex-col flex-1">
             {children}
           </div>
         </div>
@@ -42,3 +42,4 @@ export default function RootLayout({
     </html>
   );
 }
+//className="overflow-hidden flex flex-col flex-1"

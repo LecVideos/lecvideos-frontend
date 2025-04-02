@@ -8,7 +8,7 @@ export default function Auth() {
   const [isLogin, setIsLogin] = useState(true); // State to toggle between Login and Signup
 
   return (
-    <div>
+    <div className="flex flex-col flex-1">
       {isLogin ? (
         <Login switchToSignup={() => setIsLogin(false)} /> // Pass prop to toggle state
       ) : (

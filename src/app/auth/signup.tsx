@@ -127,7 +127,7 @@ const SignupPage: React.FC<SignupProps> = ({switchToLogin}) => {
   }
 
   return (
-    <div className="min-h-screen bg-blue-50 flex items-center justify-center">
+    <div className="flex-1 bg-blue-50 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold text-blue-500 mb-6">Sign Up</h1>
         <form className="space-y-4" onSubmit={signup}>
