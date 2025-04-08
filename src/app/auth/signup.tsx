@@ -41,7 +41,7 @@ const SignupPage: React.FC<SignupProps> = ({switchToLogin}) => {
       const schoolsResponse = await apiFetcher(`${process.env.NEXT_PUBLIC_ServerHost}/get-all-schools`, {method: "GET"})
 
       if(schoolsResponse?.statusCode == 200){
-        setSchools(schoolsResponse.schools);
+        setSchools(schoolsResponse.data.schools);
       }
       
     };
@@ -56,7 +56,7 @@ const SignupPage: React.FC<SignupProps> = ({switchToLogin}) => {
       const fetchDepartments = async () => {
         const departmentsResponse = await apiFetcher(`${process.env.NEXT_PUBLIC_ServerHost}/get-school-departments?school=${selectedSchool}`, { method: "GET" });
 
-        setDepartments(departmentsResponse.departments);
+        setDepartments(departmentsResponse.data.departments);
       };
   
       fetchDepartments();
@@ -112,7 +112,7 @@ const SignupPage: React.FC<SignupProps> = ({switchToLogin}) => {
       });
   
       if (response?.statusCode === 200) {
-        console.log(response.responseData)
+        console.log(response.data)
         alert("Signup successful!");
         // Optional: switch to login page
         //switchToLogin();
