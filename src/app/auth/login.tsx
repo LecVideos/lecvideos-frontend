@@ -35,9 +35,8 @@ const Login: React.FC<LoginProps> = ({ switchToSignup }) => {
         });
     
         if (response?.statusCode === 200) {
-          console.log(response.responseData.user)
           //store user data in localStorage
-          localStorage.setItem("userData", JSON.stringify(response.responseData.user));
+          localStorage.setItem("userData", JSON.stringify(response.data.user));
           //redirect to dasboard
           router.push("/dashboard");
         } else {

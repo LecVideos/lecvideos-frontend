@@ -1,3 +1,5 @@
+export const levels = [100, 200, 300, 400, 500, 600]
+
 export const apiFetcher = async (url: string, options: RequestInit = {}) => {
   try {
     options.credentials = 'include'

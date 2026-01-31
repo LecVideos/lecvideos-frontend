@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { logout, apiFetcher } from "@/lib/utilities";
+import { logout, apiFetcher, levels } from "@/lib/utilities";
+import ProgressBar from "@/app/app-components/progressBar";
 
 
 interface DepartmentModel {
@@ -30,6 +31,7 @@ const UploadVideoForm = () => {
   const [selectedSchool, setSelectedSchool] = useState<SchoolModel | null>(null);
   const [role, setRole] = useState("")
   const [departments, setDepartments] = useState<DepartmentModel[]>([])
+  const [level, setLevel] = useState("");
 
   useEffect(() => {
     const job = async () => {
@@ -120,6 +122,7 @@ const UploadVideoForm = () => {
     formData.append("title", title);
     formData.append("course", course);
     formData.append("date", date);
+    formData.append("level", level);
     if(selectedSchool) formData.append("school", selectedSchool._id);
 
     const departmentIds = selectedDepartments.map((dept) => dept._id);
@@ -195,6 +198,20 @@ const UploadVideoForm = () => {
         ))}
       </div>
 
+      <select
+        required
+        value={level}
+        onChange={(e) => setLevel(e.target.value)}
+        className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="">Select level</option>
+        {levels.map((lvl) => (
+          <option key={lvl} value={lvl}>
+            {lvl}
+          </option>
+        ))}
+      </select>
+
       <input type="date" value={date} required onChange={(e) => setDate(e.target.value)} className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
 
 
@@ -204,6 +221,8 @@ const UploadVideoForm = () => {
       >
         Submit
       </button>
+
+      <ProgressBar />
     </form>
     
   );
